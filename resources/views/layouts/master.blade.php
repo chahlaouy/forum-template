@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 
         <!-- Styles -->
         <!-- Styles -->
@@ -22,18 +24,20 @@
             }
         </style>
     </head>
-    <body class="antialiased bg-gray-100">
+    <body class="antialiased bg-gray-100 text-gray-800 ">
         <div>
             @auth
-                @include('layouts.main-navigation')   
+                @include('layouts.navigation.main-navigation')   
             @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Connexion</a>
-    
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Inscription</a>
+                @include('layouts.navigation.nav-guest')
             @endauth
         </div>
 
-        @yield('content')
+        <div class="px-4 max-w-7xl mx-auto sm:flex md:px-0">
+            <div class="w-full sm:flex-1">
+                @yield('content')
+            </div>
+        </div>
         
     </body>
 </html>

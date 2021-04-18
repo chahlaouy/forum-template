@@ -15,7 +15,13 @@ class CreateRepliesTable extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('thread_id');
+            $table->text('body');
             $table->timestamps();
+
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('thread_id')->references('id')->on('threads')->onDelete('cascade');
         });
     }
 

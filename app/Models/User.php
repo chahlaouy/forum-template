@@ -40,4 +40,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function threads(){
+
+        return $this->hasMany(Thread::class);
+    }
+
+    public function replies(){
+
+        return $this->hasMany(Reply::class);
+    }
+
+    public function getAvatarAttribute(){
+
+        return 'https://i.pravatar.cc/100';
+        // return $this->avatar ?: 'https://i.pravatar.cc/100';
+    }
 }

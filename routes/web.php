@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\UploadCkEditor;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +21,16 @@ use App\Http\Controllers\ThreadController;
 /** Threads Ressource Controller */
 
 Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
+Route::get('/threads/{channel}/{thread}', [ThreadController::class, 'show'])->name('threads.show');
+Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
+Route::post('/threads/{channel}/{thread}/replies', [ReplyController::class, 'store'])->name('reply.store');
+Route::get('/threads/{channel}', [ChannelController::class, 'index'])->name('threads.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
+/**  Upload Images For CKEditor */
+
+Route::post('/upload', [UploadCkEditor::class, 'store'])->name('CKEditor.store');
+
+Route::get('/dashboard', function () { return view('admin.dashboard'); })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

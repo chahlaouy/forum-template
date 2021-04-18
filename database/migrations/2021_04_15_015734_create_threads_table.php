@@ -14,8 +14,17 @@ class CreateThreadsTable extends Migration
     public function up()
     {
         Schema::create('threads', function (Blueprint $table) {
+            
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('title');
+            $table->string('slug');
+            $table->foreignId('channel_id');
+            $table->string('thumbnail')->nullable();
+            $table->text('body');
             $table->timestamps();
+
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

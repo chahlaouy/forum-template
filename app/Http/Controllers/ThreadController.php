@@ -14,7 +14,9 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        return view('threads.index');
+        return view('threads.index', [
+            'threads'   =>  Thread::withCount('replies')->get()
+        ]);
     }
 
     /**
@@ -35,7 +37,18 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $attributes = $request->validate([
+            'body' => 'required',
+            'title' => 'required | max:255',
+            'slug'  => 'required | max:255 | unique:threads,slug',
+            // 'thumbnail'  => 'required | image',
+            'channel_id' => 'required | exists:channels,id',
+        ]);
+
+        $thread = auth()->user()->threads()->create($attributes);
+        
+        return $thread;
     }
 
     /**
@@ -44,9 +57,13 @@ class ThreadController extends Controller
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
-    {
-        //
+    public function show($channel, Thread $thread)
+    {   
+        
+        return view('threads.show', [
+
+            'thread' => $thread
+        ]);
     }
 
     /**
