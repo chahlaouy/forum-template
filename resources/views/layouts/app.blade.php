@@ -8,29 +8,40 @@
         <title>{{ config('app.name') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+        <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
 
+        <!-- Styles -->
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased text-gray-700">
+        <div class="min-h-screen bg-green-100">
             @include('layouts.navigation.main-navigation')
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+            <div class="flex justify-between">
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <div class="w-72 py-6 px-4 sm:px-6 lg:px-8 border-r border-gray-300">
+                    {{ $sidenavbar }}
+                </div>
+                <div class="flex-1">
+                    <!-- Page Heading -->
+                    <header class="max-w-7xl mx-auto mx-4 sm:mx-6 lg:mx-8">
+                        <div class="border-b border-gray-300 py-6">
+                            {{ $header }}
+                        </div>
+                    </header>
+                    <!-- Page Content -->
+                    <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $slot }}
+                    </main>
+                </div>
+            </div>
+            
         </div>
 
     </body>

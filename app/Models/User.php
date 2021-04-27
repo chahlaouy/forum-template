@@ -41,6 +41,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot(){
+        parent::boot();
+        static::addGlobalScope('threadCount', function($builder){
+            $builder->withCount('threads');
+        });
+    }
+
     public function threads(){
 
         return $this->hasMany(Thread::class);
@@ -55,5 +62,10 @@ class User extends Authenticatable
 
         return 'https://i.pravatar.cc/100';
         // return $this->avatar ?: 'https://i.pravatar.cc/100';
+    }
+
+    public function path(){
+
+        return route('threads.index') . '?by=' . $this->name;
     }
 }

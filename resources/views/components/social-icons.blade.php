@@ -26,7 +26,7 @@
         <div class="block flex items-center border border-gray-300 rounded-2xl text-gray-700 text-sm mr-2 px-2 py-1">
             <ion-icon name="eye" class="mr-2"></ion-icon>
             <span class="pr-2 mr-3 border-r  border-gray-300">16</span>
-            <span>{{ $thread->replies->count() }} Commentaire</span>
+            <span>{{ $thread->replies->count() }} {{ Str::plural('Commentaire', $thread->replies_count) }}</span>
         </div>
     </div>
 </div>

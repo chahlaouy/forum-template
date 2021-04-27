@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thread;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -12,10 +13,28 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if( $request['by']){
+
+            $user= User::where('name', $request['by'])->firstOrFail();
+            return view('threads.index', [
+                'threads'   =>  Thread::withoutGlobalscopes()
+                                        ->where('user_id', $user->id)
+                                            ->withCount('replies')->get()
+            ]);
+        }
+        if( $request['popular']){
+
+            
+            return view('threads.index', [
+                'threads'   =>  Thread::withoutGlobalscopes()
+                                            ->orderBy('replies_count', 'desc')
+                                                ->withCount('replies')->get(),
+            ]);
+        }
         return view('threads.index', [
-            'threads'   =>  Thread::withCount('replies')->get()
+            'threads'   =>  Thread::latest()->get()
         ]);
     }
 
@@ -26,7 +45,7 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.threads.create');
     }
 
     /**
@@ -48,7 +67,7 @@ class ThreadController extends Controller
 
         $thread = auth()->user()->threads()->create($attributes);
         
-        return $thread;
+        return redirect()->route('threads.create');
     }
 
     /**
@@ -59,10 +78,10 @@ class ThreadController extends Controller
      */
     public function show($channel, Thread $thread)
     {   
-        
+        // return $thread;
         return view('threads.show', [
 
-            'thread' => $thread
+            'thread' => $thread,
         ]);
     }
 

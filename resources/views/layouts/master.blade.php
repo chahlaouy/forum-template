@@ -18,11 +18,6 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
     </head>
     <body class="antialiased bg-gray-100 text-gray-800 ">
         <div>
@@ -38,6 +33,5 @@
                 @yield('content')
             </div>
         </div>
-        
     </body>
 </html>

@@ -29,6 +29,7 @@ class ThreadFactory extends Factory
             },
             'body'  => $this->faker->paragraph(),
             'slug' => $this->faker->sentence(),
+            'title' => $this->faker->sentence(),
             'channel_id' => function(){
                 return Channel::factory()->count(1)->create()->first()->id;
             },

@@ -22,6 +22,6 @@ class Channel extends Model
 
     public function path(){
 
-        return '/threads/' . $this->name;
+        return '/blog/' . $this->name;
     }
 }

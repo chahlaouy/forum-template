@@ -11,6 +11,31 @@ class Thread extends Model
 
     protected $guarded = [];
 
+    // protected $with = ['owner', 'channel'];
+
+    /* this function is triggred whenever a thread model make a database request
+    and then foreach request we return a replies_count propertiy*/
+    protected static function boot(){
+
+        parent::boot();
+
+        static::addGlobalScope('replyCount', function($builder){
+            $builder->withCount('replies');
+        });
+        static::addGlobalScope('owner', function($builder){
+            $builder->with('owner');
+        });
+        static::addGlobalScope('channel', function($builder){
+            $builder->with('channel');
+        });
+        static::addGlobalScope('replies', function($builder){
+            $builder->with('replies');
+        });
+        
+        
+
+    }
+
     public function owner(){
 
         return $this->belongsTo(User::class, 'user_id');
@@ -18,7 +43,8 @@ class Thread extends Model
 
     public function replies(){
 
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)
+                        ->with('author');
     }
 
     public function channel(){
@@ -27,7 +53,7 @@ class Thread extends Model
     }
     public function path(){
 
-        return '/threads/' . $this->channel->name . '/' . $this->slug;
+        return '/blog/' . $this->channel->name . '/' . $this->slug;
     }
 
     public function getThumbnailAttribute(){
@@ -38,9 +64,9 @@ class Thread extends Model
 
         return 'slug';
     }
-    public function similarPosts($channel_id){
+    public function similarPosts(){
 
-        return Thread::where('channel_id', $channel_id)->get();
+        return Thread::withoutGlobalScopes()->where('channel_id', $this->channel_id)->latest()->get();
     }
 
 }

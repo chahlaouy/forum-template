@@ -20,4 +20,21 @@ class Reply extends Model
 
         return $this->belongsTo(Thread::class);
     }
+
+    public function favorites(){ 
+
+        return $this->morphMany(Favorite::class, 'favorited');
+    }
+
+    public function favorite(){
+
+        if(! $this->where('user_id', auth()->id())->first())
+        $this->favorites()->create([
+            'user_id'  => auth()->id()
+        ]);
+    }
+
+    public function getRouteKeyName(){
+        return 'id';
+    }
 }

@@ -1,0 +1,90 @@
+<x-slot name="sidenavbar">
+    <ul>
+        <li>
+            <x-admin.nav-link 
+            :href="route('dashboard')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('dashboard')">
+                Dashboard
+            </x-admin.nav-link>
+        </li>
+        <li>
+            <x-admin.dropdown>
+                <x-slot name="trigger">
+                    <x-admin.nav-link 
+                        href="#" 
+                        name="chevron-forward-outline" 
+                        :route="request()->routeIs('threads.create')">
+                            Acticles
+                    </x-admin.nav-link>
+                </x-slot>
+                <x-slot name="content">
+                    <div class="ml-3">
+                        <x-admin.nav-link 
+                            :href="route('threads.create')" 
+                            name="chevron-forward-outline" 
+                            :route="request()->routeIs('threads.create')">
+                                Créer une article
+                        </x-admin.nav-link>
+                        <x-admin.nav-link 
+                            :href="route('threads.create')" 
+                            name="chevron-forward-outline" 
+                            :route="request()->routeIs('home')">
+                                Liste des article
+                        </x-admin.nav-link>
+                    </div>
+                </x-slot>
+            </x-admin.dropdown>
+        </li>
+        <li>
+            <x-admin.nav-link 
+            :href="route('home')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('home')">
+                Historique
+            </x-admin.nav-link>
+        </li>
+        <li>
+            <x-admin.nav-link 
+            :href="route('home')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('home')">
+                Messages
+            </x-admin.nav-link>
+        </li>
+        <li>
+            <x-admin.nav-link 
+            :href="route('home')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('home')">
+                Notifications
+            </x-admin.nav-link>
+        </li>
+        <li>
+            <x-admin.nav-link 
+            :href="route('home')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('home')">
+                Commentaires
+            </x-admin.nav-link>
+        </li>
+        <li>
+            <x-admin.nav-link 
+            :href="route('home')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('home')">
+                Catégories
+            </x-admin.nav-link>
+        </li>
+        <li>
+            <x-admin.nav-link 
+            :href="route('logout')" 
+            name="chevron-forward-outline" 
+            :route="request()->routeIs('home')">
+                Déconnexion
+            </x-admin.nav-link>
+        </li>
+        
+
+    </ul>
+</x-slot>

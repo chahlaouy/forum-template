@@ -3,7 +3,7 @@
     <div class="w-full border-b-2 border-gray-300 flex justify-between items-center relative mb-4">
         <div class="flex font-semibold">
             <div class="py-2 border-b-2 border-blue-500 pr-4">
-                {{ $thread->replies->count() }} Commentaire
+                {{ $thread->replies_count }} {{ Str::plural('Commentaire', $thread->replies_count) }}
             </div>
             <div class="py-2 border-b-2 border-gray-500 px-4">
                 DIGi Forum
@@ -35,7 +35,7 @@
     </div>
     {{$slot}}
 
-    <form action="/threads/{{$thread->channel->name}}/{{$thread->slug}}/replies" method="POST">
+    <form action="/blog/{{$thread->channel->name}}/{{$thread->slug}}/replies" method="POST">
         @csrf
         <div class="flex mb-4">
             <div class="flex-shrink-0 w-24 mr-4">
