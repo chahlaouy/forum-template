@@ -26,7 +26,7 @@
     <div>
         <span class="block text-sm pb-4">Dérniere 3 Articles</span>
         <x-admin.card :threads="$threads"></x-admin.card>
-        <x-admin.chart></x-admin.chart>
+        <x-admin.chart :stats="$stats"></x-admin.chart>
     </div>
     
 </x-app-layout>

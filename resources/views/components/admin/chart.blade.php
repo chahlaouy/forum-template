@@ -1,4 +1,4 @@
-
+@props(['stats'])
 <div class="rounded-3xl p-8 w-full my-12">
     <div class="flex">
         <div class="p-2 text-center">
@@ -27,6 +27,7 @@
             <div class="rounded-2xl shadow-2xl h-full w-64 px-2 py-8">
                 <div class="text-2xl capitalize leading-loose tracking-wide font-bold text-green-800">
                     Vos Articles
+                   
                 </div>
                 <div class="text-4xl capitalize leading-loose tracking-wide text-indigo-600">
                     {{auth()->user()->threads_count}}
@@ -41,9 +42,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script>
-    var month = "monthmonthht";
+    
+    var month = [ "{{ $stats['dayOne']['date'] }}", "{{ $stats['dayTwo']['date'] }}", "{{ $stats['dayThree']['date'] }}", "{{ $stats['dayfour']['date'] }}", "{{ $stats['dayfive']['date'] }}", "{{ $stats['daySix']['date'] }}", "{{ $stats['daySeven']['date'] }}" ];
 
-    var visitors = ['14', '12', '0', '12', '45', '47','14', '12', '0', '12', '45', '47'];
+    var visitors = [ "{{ $stats['dayOne']['threads_count'] }}", "{{ $stats['dayTwo']['threads_count'] }}", "{{ $stats['dayThree']['threads_count'] }}", "{{ $stats['dayfour']['threads_count'] }}", "{{ $stats['dayfive']['threads_count'] }}", "{{ $stats['daySix']['threads_count'] }}", "{{ $stats['daySeven']['threads_count'] }}" ];
     var lineChartData = {
         labels: month,
         datasets: [{
@@ -53,7 +55,7 @@
         }]
     };
 
-    var articles = ['14', '12', '0', '12', '45', '47','14', '12', '0', '12', '45', '47'];
+    var articles = [ "{{ $stats['dayOne']['threads_count'] }}", "{{ $stats['dayTwo']['threads_count'] }}", "{{ $stats['dayThree']['threads_count'] }}", "{{ $stats['dayfour']['threads_count'] }}", "{{ $stats['dayfive']['threads_count'] }}", "{{ $stats['daySix']['threads_count'] }}", "{{ $stats['daySeven']['threads_count'] }}" ];;
     var barChartData = {
         labels: month,
         datasets: [{
@@ -82,7 +84,7 @@
                 responsive: true,
                 title: {
                     display: true,
-                    text: "Membre mensuelle de l'utilisateur"
+                    text: "Nombre de visite par ref"
                 }
             }
         });
@@ -103,7 +105,7 @@
                 responsive: true,
                 title: {
                     display: true,
-                    text: "Nombre mensuelle de l'offres"
+                    text: "Nombre d'article par ref"
                 }
             }
         });
