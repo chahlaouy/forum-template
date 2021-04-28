@@ -17,9 +17,9 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
     </head>
-    <body class="antialiased bg-gray-100 text-gray-800 ">
+    <body class="antialiased bg-gray-100 text-gray-800">
         <div>
             @auth
                 @include('layouts.navigation.main-navigation')   
@@ -27,7 +27,9 @@
                 @include('layouts.navigation.nav-guest')
             @endauth
         </div>
-
+        <div>
+            @yield('header')
+        </div>
         <div class="px-4 max-w-7xl mx-auto sm:flex md:px-0">
             <div class="w-full sm:flex-1">
                 @yield('content')

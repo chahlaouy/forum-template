@@ -68,4 +68,8 @@ class User extends Authenticatable
 
         return route('threads.index') . '?by=' . $this->name;
     }
+    function getRouteKeyName(){
+ 
+        return 'name';
+    }
 }

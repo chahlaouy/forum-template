@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:api'])->get('/replies/favorites/{reply}', [FavoriteController::class, 'storeReply']);
-Route::middleware(['auth:api'])->get('/threads/favorites/{thread}', [FavoriteController::class, 'storeThread']);
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

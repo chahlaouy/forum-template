@@ -1,4 +1,24 @@
 @extends('layouts.master')
+
+@section('header')
+    <div class="max-w-7xl mx-auto flex items-center h-96">
+        <div class="flex-1 text-center bg-white shadow p-4 rounded-lg">
+            <h1 class="text-2xl font-bold text-gray-700 pb-4">
+                Consulting, c'est plus que donner des conseils
+            </h1>
+            <p class="tracking-wide leading-loose text-gray-700 text-sm max-w-sm mx-auto pb-4">
+                Pour réussir en affaires aujourd'hui, vous devez être flexible et avoir une bonne planification
+            </p>
+            <a href="#" class="inline-block text-gray-100 w-56 text-center py-2 rounded shadow bg-blue-600 border-2 border-blue-600">Commencer  Maintenant
+            </a>
+            <a href="#" class="inline-block text-blue-600 w-56 text-center py-2 rounded border-2 border-blue-600">Nos Références
+            </a>
+        </div>
+        <div class="flex-1">
+
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="pt-12 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-8">
         @foreach ($threads as $thread)

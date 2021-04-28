@@ -51,6 +51,18 @@ class Thread extends Model
 
         return $this->belongsTo(Channel::class);
     }
+    public function favorites(){ 
+
+        return $this->morphMany(Favorite::class, 'favorited');
+    }
+
+    public function favorite(){
+
+        if(! $this->where('user_id', auth()->id())->first())
+        $this->favorites()->create([
+            'user_id'  => auth()->id()
+        ]);
+    }
     public function path(){
 
         return '/blog/' . $this->channel->name . '/' . $this->slug;

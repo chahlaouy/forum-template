@@ -19,8 +19,7 @@ class ThreadController extends Controller
 
             $user= User::where('name', $request['by'])->firstOrFail();
             return view('threads.index', [
-                'threads'   =>  Thread::withoutGlobalscopes()
-                                        ->where('user_id', $user->id)
+                'threads'   =>  Thread::where('user_id', $user->id)
                                             ->withCount('replies')->get()
             ]);
         }
@@ -28,8 +27,7 @@ class ThreadController extends Controller
 
             
             return view('threads.index', [
-                'threads'   =>  Thread::withoutGlobalscopes()
-                                            ->orderBy('replies_count', 'desc')
+                'threads'   =>  Thread::orderBy('replies_count', 'desc')
                                                 ->withCount('replies')->get(),
             ]);
         }

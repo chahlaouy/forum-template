@@ -20,6 +20,7 @@
         setTimeout(function(){
             animation = false
         }, 100)
+        window.axios.post('/threads/favorites/{{$thread->slug}}', {})
     ">
             <div class="w-8 h-8 transform transition sc" :class="animation ? 'scale-150' : 'scale-100'">
 
