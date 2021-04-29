@@ -22,6 +22,7 @@ class CreateThreadsTable extends Migration
             $table->foreignId('channel_id');
             $table->string('thumbnail')->nullable();
             $table->text('body');
+            $table->text('description');
             $table->timestamps();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

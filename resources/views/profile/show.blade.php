@@ -65,7 +65,7 @@
 
         </div>
         <div class="flex-1">
-            @forelse ($userProfile->threads as $thread)
+            @forelse ($threads as $thread)
                 
                 <div class="w-full bg-white rounded-2xl shadow flex justify-between my-8">
                     <div class="p-4 flex-1">
@@ -93,6 +93,9 @@
                     <div class="w-48 h-48">
                         <img src="{{$thread->thumbnail}}" alt="article image thumbnail" class="w-full h-full bg-cover object-cover bg-center rounded-r-2xl">
                     </div>
+                </div>
+                <div>
+                    {{$threads->links()}}
                 </div>
             @empty
                 

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +39,23 @@ class ThreadController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function AuthorIndex()
+    {
+        if(auth()->user()->can('viewAny', Thread::class)){
+            return view('admin.threads.index', [
+                'threads'   =>  auth()->user()->threads()->latest()->paginate(15)
+            ]);
+        }else{
+            return redirect()->route('home');
+        }
+        
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -63,9 +82,17 @@ class ThreadController extends Controller
             'channel_id' => 'required | exists:channels,id',
         ]);
 
-        $thread = auth()->user()->threads()->create($attributes);
-        
-        return redirect()->route('threads.create');
+        if(auth()->user()->can('create', Thread::class)){
+            $thread = auth()->user()->threads()->create($attributes);
+            if($thread){
+    
+                return back()->with('success', 'Article Creér avec Succés');
+            }else{
+                return back()->with('error', "Il ya une erreur s' il vous plais essayer plus tard");
+            }
+        }else{
+            return redirect()->route('home')->with('error', "Vous n'avez pas le droit de supprimer cette article");
+        }
     }
 
     /**
@@ -109,11 +136,18 @@ class ThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  string  $channel
      * @param  \App\Models\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy($channel, Thread $thread)
     {
-        //
+        // dd($thread);
+        if(auth()->user()->can('delete', $thread)){
+            $thread->delete();
+            return back()->with('success', 'Article Supprimée avec succés');
+        }else{
+            return redirect()->route('home')->with('error', "Vous n'avez pas le droit de supprimer cette article");
+        }
     }
 }

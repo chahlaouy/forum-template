@@ -30,17 +30,21 @@ Route::get('/blog/{channel}', [ChannelController::class, 'index'])->name('thread
 
 Route::get('/profiles/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
-/** Thread ressource */ 
+/** Thread ressource Author */ 
+
+Route::get('/admin/blog', [ThreadController::class, 'authorIndex'])->middleware(['auth'])->name('author.threads.index');
 Route::get('/admin/blog/create', [ThreadController::class, 'create'])->middleware(['auth'])->name('threads.create');
-Route::post('/admin/blog', [ThreadController::class, 'store'])->name('threads.store');
+Route::post('/admin/blog', [ThreadController::class, 'store'])->middleware(['auth'])->name('threads.store');
+Route::delete('/blog/{channel}/{thread}', [ThreadController::class, 'destroy'])->middleware(['auth'])->name('threads.destroy');
+
 Route::post('/blog/{channel}/{thread}/replies', [ReplyController::class, 'store'])->name('reply.store');
 
 
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['auth:api'])->post('/blog/{thread}/favorites', [FavoriteController::class, 'storeThread']);
-Route::middleware(['auth:api'])->post('/blog/replies/{reply}/favorites', [FavoriteController::class, 'storeReply']);
+Route::middleware(['auth'])->post('/blog/{thread}/favorites', [FavoriteController::class, 'storeThread']);
+Route::middleware(['auth'])->post('/blog/replies/{reply}/favorites', [FavoriteController::class, 'storeReply']);
 
 /**  Upload Images For CKEditor */
 

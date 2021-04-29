@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function path(){
 
-        return route('threads.index') . '?by=' . $this->name;
+        return  '/profiles/' . $this->name;
     }
     function getRouteKeyName(){
  

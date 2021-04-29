@@ -27,9 +27,9 @@
                                 Créer une article
                         </x-admin.nav-link>
                         <x-admin.nav-link 
-                            :href="route('threads.create')" 
+                            :href="route('author.threads.index')" 
                             name="chevron-forward-outline" 
-                            :route="request()->routeIs('home')">
+                            :route="request()->routeIs('author.threads.index')">
                                 Liste des article
                         </x-admin.nav-link>
                     </div>

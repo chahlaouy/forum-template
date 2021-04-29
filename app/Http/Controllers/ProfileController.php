@@ -48,7 +48,8 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         $data = [
-            'userProfile' => $user
+            'userProfile' => $user,
+            'threads'   => $user->threads()->paginate(10)
         ];
         return view('profile.show', $data);
     }
@@ -84,6 +85,8 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (request()->wantsJson()){
+            return [];
+        }
     }
 }

@@ -20,6 +20,17 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased text-gray-700">
+        @if (Session::get('success'))    
+            <x-flash type="success">
+                {{Session::get('success')}}
+            </x-flash>
+        @endif
+        @if (Session::get('error'))    
+            <x-flash type="error">
+                {{Session::get('error')}}
+            </x-flash>
+        @endif
+        
         <div class="min-h-screen bg-green-100">
             @include('layouts.navigation.main-navigation')
 
