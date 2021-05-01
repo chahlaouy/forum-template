@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use \App\Models\Channel;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         // \View::share('channels', Channel::all());
 
         /** Or if You want to share Just with one or two views etc .. */
-        \View::composer(['layouts.navigation.main-navigation', 'layouts.navigation.nav-guest', 'admin.dashboard', 'admin.threads.create'], function($view){
+        View::composer(['layouts.partials.main-navigation', 'layouts.partials.nav-guest', 'users.author.dashboard', 'threads.create'], function($view){
             $view->with('channels', \App\Models\Channel::all());
         });
         /*** Share for all views */

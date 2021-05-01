@@ -29,9 +29,11 @@ class Reply extends Model
     public function favorite(){
 
         if(! $this->where('user_id', auth()->id())->first())
-        $this->favorites()->create([
-            'user_id'  => auth()->id()
-        ]);
+            $this->favorites()
+                    ->create([
+                        'user_id'  => auth()->id()
+                    ]);
+
     }
 
     public function getRouteKeyName(){

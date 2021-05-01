@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\FollowNotification;
 
 class User extends Authenticatable
 {
@@ -47,6 +49,7 @@ class User extends Authenticatable
             $builder->withCount('threads');
         });
     }
+    
 
     public function threads(){
 
@@ -58,9 +61,17 @@ class User extends Authenticatable
         return $this->hasMany(Reply::class);
     }
 
+    public function timeline(){
+         $following = $this->follows->pluck('id');
+
+         return Thread::whereIn('user_id', $following)
+                            ->orWhere('user_id', $this->id)
+                            ->latest()->paginate(10);
+    }
+
     public function getAvatarAttribute(){
 
-        return 'https://i.pravatar.cc/100';
+        return 'https://i.pravatar.cc/300';
         // return $this->avatar ?: 'https://i.pravatar.cc/100';
     }
 
@@ -68,8 +79,43 @@ class User extends Authenticatable
 
         return  '/profiles/' . $this->name;
     }
-    function getRouteKeyName(){
+    // function getRouteKeyName(){
  
-        return 'name';
+    //     return 'name';
+    // }
+
+    public function followers(){
+        
+        return $this->belongsToMany(User::class, 'follows','following_user_id', 'user_id');
+    }
+    public function follows(){
+        return $this->belongsToMany(User::class, 'follows','user_id', 'following_user_id');
+
+    }
+
+    public function follow(User $user){
+        return $this->follows()->save($user);
+    }
+    public function unfollow(User $user){
+        return $this->follows()->detach($user);
+    }
+
+    public function toggleFollow(User $user){
+        if($this->isFollowing($user)){
+            Notification::send([$user], new FollowNotification([
+                'name' => $this->name,
+                'action' => 'unfollow'
+            ]));
+            return $this->unfollow($user);
+        }
+        Notification::send([$user], new FollowNotification([
+            'name' => $this->name,
+            'action' => 'follow'
+        ]));
+        return $this->follow($user);
+    }
+
+    public function isFollowing($user){
+        return $this->follows()->where('following_user_id', $user->id)->exists();
     }
 }

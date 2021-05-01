@@ -21,14 +21,12 @@
                                 <ion-icon name="caret-down"></ion-icon>
                         </div>
                         <ul class="w-56 bg-white rounded-lg absolute py-px border border-gray-200" x-show.transition="dropdownBrowse" x-on:click.away="dropdownBrowse = false">
-                            @auth
                                 
-                                <li>
-                                    <a href="#" class="block py-2 pl-4 hover:bg-gray-100">
-                                        Mes Articles
-                                    </a>
-                                </li>
-                            @endauth
+                            <li>
+                                <a href="/blog?by={{auth()->user()->name}}" class="block py-2 pl-4 hover:bg-gray-100">
+                                    Mes Articles
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{route('threads.index')}}?popular=true" class="block py-2 pl-4 hover:bg-gray-100">
                                     Populaires

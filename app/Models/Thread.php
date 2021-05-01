@@ -59,9 +59,11 @@ class Thread extends Model
     public function favorite(){
 
         if(! $this->where('user_id', auth()->id())->first())
-        $this->favorites()->create([
-            'user_id'  => auth()->id()
-        ]);
+            $this->favorites()
+                    ->create([
+                        'user_id'  => auth()->id()
+                    ]);
+
     }
     public function path(){
 
@@ -72,13 +74,15 @@ class Thread extends Model
 
         return 'https://picsum.photos/700';
     }
-    public function getRouteKeyName(){
-
-        return 'slug';
-    }
+    
     public function similarPosts(){
 
-        return Thread::withoutGlobalScopes()->where('channel_id', $this->channel_id)->latest()->get();
+        return $this->
+            withoutGlobalScopes()
+                ->where('channel_id', $this->channel_id)
+                    ->latest()
+                        ->take(3)
+                            ->get();
     }
 
 }

@@ -81,6 +81,6 @@ class AdminController extends Controller
             'threads'   => auth()->user()->threads()->orderBy('updated_at', 'DESC')->take(3)->get(),
             'stats' => $stats
         ];
-        return view('admin.dashboard', $data);
+        return view('users.author.dashboard', $data);
     }
 }

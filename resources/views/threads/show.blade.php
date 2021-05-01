@@ -2,39 +2,14 @@
 @section('content')
     {{-- section for favoriting a thread --}}
 
-    <div class="fixed z-50 bottom-0 right-0 p-8 bg-transparent cursor-pointer" x-data="{animation: false, count : 1}">
-         
-         <div class="items-center flex w-16 justify-center text-lg text-blue-500 mb-1">
-             <span class="block h-8 flex items-center justify-center" x-show.transition.1000ms="animation">+</span> 
-             <span class="block h-8 flex items-center justify-center" x-text="count" x-show.transition.1000ms="animation"></span> 
-        </div>
-         <div class="items-center flex w-16 justify-center text-sm text-blue-500 mb-4">
-            <span class="block w-8 h-8 flex items-center justify-center bg-blue-200 rounded-full">
-                25    
-            </span>  
-        </div>
-        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 border-2 border-blue-500" x-on:click="
-        animation = true
-        count++
-        fetch('http://127.0.0.1/replies/favorites/1').then(data => console.log).catch(e => console.log)
-        setTimeout(function(){
-            animation = false
-        }, 100)
-        window.axios.post('/threads/favorites/{{$thread->slug}}', {})
-    ">
-            <div class="w-8 h-8 transform transition sc" :class="animation ? 'scale-150' : 'scale-100'">
-
-                <x-clap-icon></x-clap-icon>
-            </div>
-        </div>
-    </div>
+    <x-clap></x-clap>
     <div class="pt-12 lg:flex">
 
         <div class="flex-1 lg:mr-8">
             <div class="px-4 lg:px-24 pb-8">
                 <img src="{{$thread->thumbnail}}" alt="" class="w-full h-96 bg-cover object-cover bg-center rounded-lg">
             </div>
-            <span class="px-3 py-2 rounded-full bg-blue-600 text-white uppercase text-xs">
+            <span class="px-3 py-2 rounded-full bg-green-300 text-gray-800 uppercase text-xs">
                 {{$thread->channel->name}}
             </span>
             {{-- channel --}}
@@ -63,11 +38,11 @@
 
             {{-- author link and description --}}
             <div class="my-8 border border-gray-300 rounded-lg p-4 flex">
-                <div class="border border-gray-300 rounded-lg mr-4 flex-shrink-0">
+                <a href="{{ $thread->owner->path() }}" class="block border border-gray-300 rounded-lg mr-4 flex-shrink-0">
                     <img src="{{$thread->owner->avatar}}" alt="Author avatar" class="w-32 h-32 bg-cover object-cover bg-center rounded-lg">
-                </div>
+                </a>
                 <div>
-                    <span class="uppercase block pb-4 font-semibold">{{$thread->owner->name}}</span>
+                    <a href="{{ $thread->owner->path() }}" class="uppercase block pb-4 font-semibold underline">{{$thread->owner->name}}</a>
                     <p class="tracking-wider leading-loose text-gray-600 text-sm">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum doloribus, saepe debitis similique minima amet veniam voluptatem culpa dolores neque est eius ipsam
                     </p>

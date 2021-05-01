@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Channel;
+use App\Models\Follow;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ChannelController extends Controller
+
+class FollowController extends Controller
 {
     /**
      * Display a listing of the resource.
-     ** @param  \App\Models\Channel  $channel
+     *@param App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function index(Channel $channel)
+    public function index(User $user)
     {
-        return view('threads.index', [
 
-            'threads' => $channel->threads()->latest()->simplePaginate(10)
+        return view('profile.follows.index', [
+            'userProfile' => $user
         ]);
     }
 
@@ -33,32 +35,34 @@ class ChannelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param  App\Models\User  $user
      * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function store(Request $request, User $user)
+    {
+        auth()->user()->toggleFollow($user); 
+        return back()->with('success', 'vous suivez maintenant ' . $user->name);
+    } 
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function show(Follow $follow)
     {
         //
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Channel  $channel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Channel $channel)
-    {
-        
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Channel  $channel
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function edit(Channel $channel)
+    public function edit(Follow $follow)
     {
         //
     }
@@ -67,10 +71,10 @@ class ChannelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Channel  $channel
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Channel $channel)
+    public function update(Request $request, Follow $follow)
     {
         //
     }
@@ -78,10 +82,10 @@ class ChannelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Channel  $channel
+     * @param  \App\Models\Follow  $follow
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Channel $channel)
+    public function destroy(Follow $follow)
     {
         //
     }

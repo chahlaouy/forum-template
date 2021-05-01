@@ -1,5 +1,5 @@
 
-<nav x-data="{ open: false, dropdown: false, dropdownBrowse : false}" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false, dropdown: false, dropdownBrowse : false}" class="">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -17,44 +17,37 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <div class="relative z-50">
                             <div
-                                class="cursor-pointer block inline-flex items-center h-full px-1 pt-1 border-b-2 text-sm font-medium leading-5 text-gray-500 focus:outline-none hover:border-indigo-700 transition duration-150 ease-in-out hover:text-gray-900"
+                                class="cursor-pointer block inline-flex items-center h-full px-1 pt-1 border-b-2 border-blue-600 text-sm font-medium leading-5 text-gray-700 focus:outline-none hover:border-indigo-700 transition duration-150 ease-in-out hover:text-gray-900"
                                 x-on:click="dropdownBrowse = !dropdownBrowse"
                                 >
                                     <span>Browse</span> 
                                     <ion-icon name="caret-down"></ion-icon>
                             </div>
-                            <ul class="w-56 bg-white rounded-lg absolute" x-show.transition="dropdownBrowse" x-on:click.away="dropdownBrowse = false">
-                                @auth
-                                    
-                                    <li>
-                                        <a href="#" class="block py-2 pl-4 hover:bg-blue-500 hover:text-gray-100">
-                                            Mes Articles
-                                        </a>
-                                    </li>
-                                @endauth
+                            <ul class="w-56 bg-white rounded-lg absolute py-px border border-gray-200" x-show.transition="dropdownBrowse" x-on:click.away="dropdownBrowse = false">
+                                
                                 <li>
-                                    <a href="{{route('threads.index')}}?popular=true" class="block py-2 pl-4 hover:bg-blue-500 hover:text-gray-100">
+                                    <a href="{{route('threads.index')}}?popular=true" class="block py-2 pl-4 hover:bg-gray-100">
                                         Populaires
                                     </a>
                                 </li>
     
                             </ul>
                             
-                        </div>
+                        </div> 
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <div class="relative z-40">
                                 <div
-                                class="cursor-pointer block inline-flex items-center h-full px-1 pt-1 border-b-2 text-sm font-medium leading-5 text-gray-500 focus:outline-none hover:border-indigo-700 transition duration-150 ease-in-out hover:text-gray-900"
+                                class="cursor-pointer block inline-flex items-center h-full px-1 pt-1 border-b-2 text-sm font-medium leading-5 text-gray-700 focus:outline-none hover:border-blue-600 transition duration-150 ease-in-out hover:text-gray-900"
                                 x-on:click="dropdown = !dropdown"
                                 >
                                     <span>Category</span> 
                                     <ion-icon name="caret-down"></ion-icon>
                                 </div>
-                            <ul class="w-56 bg-white rounded-lg absolute" x-show.transition="dropdown" x-on:click.away="dropdown = false">
+                            <ul class="w-56 bg-white rounded-lg absolute py-px border border-gray-200" x-show.transition="dropdown" x-on:click.away="dropdown = false">
                                 @foreach ($channels as $channel) 
                                     <li>
-                                        <a href="{{$channel->path()}}" class="block py-2 pl-4 hover:bg-blue-500 hover:text-gray-100">
+                                        <a href="{{$channel->path()}}" class="block py-2 pl-4 hover:bg-gray-100">
                                             {{$channel->name}}
                                         </a>
                                     </li>

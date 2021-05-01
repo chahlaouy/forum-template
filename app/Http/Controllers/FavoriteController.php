@@ -11,12 +11,12 @@ class FavoriteController extends Controller
      *  @param \App\Models\Reply $reply
      * @return \Illuminate\Http\Response
      */
-    public function storeReply(Reply $reply){
+    public function favoriteReply(Reply $reply){
 
         $reply->favorite();
         return $reply->favorites;
     }
-    public function storeThread(Reply $reply){
+    public function favoriteThread(Reply $reply){
 
         $reply->favorite();
         return $reply->favorites;

@@ -10,11 +10,6 @@ class Channel extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function getRouteKeyName(){
-        
-        return 'name';
-    }
-
     public function threads(){
 
         return $this->hasMany(Thread::class);

@@ -14,25 +14,31 @@
 
         <!-- Styles -->
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+        <link 
+            rel="stylesheet" 
+            href="{{ asset('css/app.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased text-gray-700">
         @if (Session::get('success'))    
-            <x-flash type="success">
+            <x-custom.flash type="success">
                 {{Session::get('success')}}
-            </x-flash>
+            </x-custom.flash>
         @endif
         @if (Session::get('error'))    
-            <x-flash type="error">
+            <x-custom.flash type="error">
                 {{Session::get('error')}}
-            </x-flash>
+            </x-custom.flash>
         @endif
         
         <div class="min-h-screen bg-green-100">
-            @include('layouts.navigation.main-navigation')
+            @include('layouts.partials.main-navigation')
 
             <div class="flex justify-between">
 

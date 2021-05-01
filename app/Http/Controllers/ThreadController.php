@@ -22,7 +22,7 @@ class ThreadController extends Controller
             $user= User::where('name', $request['by'])->firstOrFail();
             return view('threads.index', [
                 'threads'   =>  Thread::where('user_id', $user->id)
-                                            ->withCount('replies')->get()
+                                            ->withCount('replies')->paginate(10)
             ]);
         }
         if( $request['popular']){
@@ -30,11 +30,19 @@ class ThreadController extends Controller
             
             return view('threads.index', [
                 'threads'   =>  Thread::orderBy('replies_count', 'desc')
-                                                ->withCount('replies')->get(),
+                                                ->withCount('replies')->paginate(10),
+            ]);
+        }
+        if( $request['timeline']){
+
+            
+            return view('threads.index', [
+                'threads'   =>  Thread::orderBy('replies_count', 'desc')
+                                                ->withCount('replies')->paginate(10),
             ]);
         }
         return view('threads.index', [
-            'threads'   =>  Thread::latest()->get()
+            'threads'   =>  Thread::latest()->simplePaginate(10)
         ]);
     }
 
@@ -45,9 +53,10 @@ class ThreadController extends Controller
      */
     public function AuthorIndex()
     {
+        
         if(auth()->user()->can('viewAny', Thread::class)){
             return view('admin.threads.index', [
-                'threads'   =>  auth()->user()->threads()->latest()->paginate(15)
+                'threads'   =>  auth()->user()->threads()->latest()->paginate(10)
             ]);
         }else{
             return redirect()->route('home');
