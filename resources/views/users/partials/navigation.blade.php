@@ -38,41 +38,41 @@
         </li>
         <li>
             <x-custom.nav-link 
-            :href="route('home')" 
+            :href="route('threads.index')" 
             name="chevron-forward-outline" 
-            :route="request()->routeIs('home')">
+            :route="request()->routeIs('threads.index')">
                 Historique
             </x-custom.nav-link>
         </li>
         <li>
             <x-custom.nav-link 
-            :href="route('home')" 
+            :href="route('threads.index')" 
             name="chevron-forward-outline" 
-            :route="request()->routeIs('home')">
+            :route="request()->routeIs('threads.index')">
                 Messages
             </x-custom.nav-link>
         </li>
         <li>
             <x-custom.nav-link 
-            :href="route('home')" 
+            :href="route('threads.index')" 
             name="chevron-forward-outline" 
-            :route="request()->routeIs('home')">
+            :route="request()->routeIs('threads.index')">
                 Notifications
             </x-custom.nav-link>
         </li>
         <li>
             <x-custom.nav-link 
-            :href="route('home')" 
+            :href="route('threads.index')" 
             name="chevron-forward-outline" 
-            :route="request()->routeIs('home')">
+            :route="request()->routeIs('threads.index')">
                 Commentaires
             </x-custom.nav-link>
         </li>
         <li>
             <x-custom.nav-link 
-            :href="route('home')" 
+            :href="route('threads.index')" 
             name="chevron-forward-outline" 
-            :route="request()->routeIs('home')">
+            :route="request()->routeIs('threads.index')">
                 Catégories
             </x-custom.nav-link>
         </li>
@@ -80,7 +80,7 @@
             <x-custom.nav-link 
             :href="route('logout')" 
             name="chevron-forward-outline" 
-            :route="request()->routeIs('home')">
+            :route="request()->routeIs('threads.index')">
                 Déconnexion
             </x-custom.nav-link>
         </li>

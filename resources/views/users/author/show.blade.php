@@ -109,7 +109,7 @@
     
                             <div class="w-5 h-5 transform transition mr-2">
     
-                                <x-clap-icon></x-clap-icon>
+                                <x-custom.clap-icon></x-custom.clap-icon>
                             </div>
     
                             <span>{{ 0 }}</span>

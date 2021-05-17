@@ -1,4 +1,3 @@
-@props(['thread'])
 <div class="pb-4">
     <div class="w-full border-b-2 border-gray-300 flex justify-between items-center relative mb-4">
         <div class="flex font-semibold">
@@ -33,7 +32,7 @@
         @endauth
 
     </div>
-    {{$slot}}
+    @include('comments.partials.old-comments')
 
     <form action="/blog/{{$thread->channel->name}}/{{$thread->slug}}/replies" method="POST">
         @csrf

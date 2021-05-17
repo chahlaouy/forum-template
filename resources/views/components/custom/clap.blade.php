@@ -24,7 +24,7 @@
    ">
        <div class="w-8 h-8 transform transition" :class="animation ? 'scale-150' : 'scale-100'">
 
-           <x-clap-icon></x-clap-icon>
+           <x-custom.clap-icon></x-custom.clap-icon>
        </div>
    </div>
 </div>

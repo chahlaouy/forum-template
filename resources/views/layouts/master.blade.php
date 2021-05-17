@@ -27,20 +27,20 @@
     </head>
     <body class="antialiased bg-gray-100 text-gray-800">
         @if (Session::get('success'))    
-            <x-flash type="success">
+            <x-custom.flash type="success">
                 {{Session::get('success')}}
-            </x-flash>
+            </x-custom.flash>
         @endif
         @if (Session::get('error'))    
-            <x-flash type="error">
+            <x-custom.flash type="error">
                 {{Session::get('error')}}
-            </x-flash>
+            </x-custom.flash>
         @endif
         <div class="bg-gray-100">
             @auth
-                @include('layouts.navigation.main-navigation')   
+                @include('layouts.partials.main-navigation')   
             @else
-                @include('layouts.navigation.nav-guest')
+                @include('layouts.partials.nav-guest')
             @endauth
             <div>
                 @yield('header')

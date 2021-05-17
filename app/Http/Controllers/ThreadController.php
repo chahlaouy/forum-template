@@ -20,7 +20,7 @@ class ThreadController extends Controller
         if( $request['by']){
 
             $user= User::where('name', $request['by'])->firstOrFail();
-            return view('threads.index', [
+            return view('home.index', [
                 'threads'   =>  Thread::where('user_id', $user->id)
                                             ->withCount('replies')->paginate(10)
             ]);
@@ -28,7 +28,7 @@ class ThreadController extends Controller
         if( $request['popular']){
 
             
-            return view('threads.index', [
+            return view('home.index', [
                 'threads'   =>  Thread::orderBy('replies_count', 'desc')
                                                 ->withCount('replies')->paginate(10),
             ]);
@@ -36,12 +36,12 @@ class ThreadController extends Controller
         if( $request['timeline']){
 
             
-            return view('threads.index', [
+            return view('home.index', [
                 'threads'   =>  Thread::orderBy('replies_count', 'desc')
                                                 ->withCount('replies')->paginate(10),
             ]);
         }
-        return view('threads.index', [
+        return view('home.index', [
             'threads'   =>  Thread::latest()->simplePaginate(10)
         ]);
     }
@@ -55,7 +55,7 @@ class ThreadController extends Controller
     {
         
         if(auth()->user()->can('viewAny', Thread::class)){
-            return view('admin.threads.index', [
+            return view('threads.index', [
                 'threads'   =>  auth()->user()->threads()->latest()->paginate(10)
             ]);
         }else{
@@ -71,7 +71,7 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        return view('admin.threads.create');
+        return view('threads.create');
     }
 
     /**
@@ -156,7 +156,7 @@ class ThreadController extends Controller
             $thread->delete();
             return back()->with('success', 'Article Supprimée avec succés');
         }else{
-            return redirect()->route('home')->with('error', "Vous n'avez pas le droit de supprimer cette article");
+            return redirect()->route('threads.index')->with('error', "Vous n'avez pas le droit de supprimer cette article");
         }
     }
 }

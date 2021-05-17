@@ -2,7 +2,7 @@
 @section('content')
     {{-- section for favoriting a thread --}}
 
-    <x-clap></x-clap>
+    <x-custom.clap></x-custom.clap>
     <div class="pt-12 lg:flex">
 
         <div class="flex-1 lg:mr-8">
@@ -27,14 +27,14 @@
                     <span class="text-gray-800 mr-4">{{$thread->updated_at->diffForHumans()}}</span>
                 </div>
             </div>
-            <x-social-icons :thread="$thread"></x-social-icons>
+            <x-custom.social-icons :thread="$thread"></x-custom.social-icons>
             
             <div class="my-8">
                 <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl">
                     {!! $thread->body !!}
                 </article>
             </div>
-            <x-social-icons :thread="$thread"></x-social-icons>
+            <x-custom.social-icons :thread="$thread"></x-custom.social-icons>
 
             {{-- author link and description --}}
             <div class="my-8 border border-gray-300 rounded-lg p-4 flex">
@@ -67,14 +67,10 @@
             </div>
 
             {{-- comments section --}}
-
-            
-
-            <x-comment-component :thread="$thread">
-                @include('layouts.old-comments')
-            </x-comment-component>
+            @include('comments.comment-component')
+                
         </div>
-        <x-sidebar></x-sidebar>
+        {{-- <x-custom.sidebar></x-custom.sidebar> --}}
         
     </div>
 @endsection

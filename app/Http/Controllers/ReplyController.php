@@ -8,6 +8,7 @@ use App\Models\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 
 class ReplyController extends Controller
 {
@@ -64,7 +65,7 @@ class ReplyController extends Controller
             $user = User::create([
                 'name'  =>  $attributes['name'],
                 'email'  =>  $attributes['email'],
-                'password'  =>  \Hash::make($attributes['password']),
+                'password'  =>  Hash::make($attributes['password']),
             ]);
 
             $reply = $user->replies()->create([

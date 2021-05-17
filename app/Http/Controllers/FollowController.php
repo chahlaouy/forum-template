@@ -17,7 +17,7 @@ class FollowController extends Controller
     public function index(User $user)
     {
 
-        return view('profile.follows.index', [
+        return view('users.author.followers.index', [
             'userProfile' => $user
         ]);
     }

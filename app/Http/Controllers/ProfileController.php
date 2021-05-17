@@ -51,7 +51,7 @@ class ProfileController extends Controller
             'userProfile' => $user,
             'threads'   => $user->threads()->latest()->paginate(10)
         ];
-        return view('profile.show', $data);
+        return view('users.author.show', $data);
     }
 
     /**
